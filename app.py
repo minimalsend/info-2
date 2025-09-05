@@ -345,7 +345,24 @@ def parse_response(content: str) -> dict:
         for line in content.split("\n")
         if ":" in line
     )
-
+def get_token():
+    uid = "3790435245"
+    password = "B8623E3106EDB07BD6D58B0D7688E5B7193854527368C9AF143984381BAFDBCE"
+    
+    url = "https://get-jwt.squareweb.app/get-token"
+    params = {
+        "uid": uid,
+        "password": password
+    }
+    
+    response = requests.get(url, params=params)
+    
+    if response.status_code == 200:
+        data = response.json()
+        return data.get("token")  # retorna apenas o token
+    else:
+        raise Exception(f"Erro ao obter token: {response.status_code}")
+        
 def GetAccountInformation(uid: str, unk: str, region: str, endpoint: str) -> dict:
     """Get player account information."""
     region = region.upper()
@@ -362,7 +379,7 @@ def GetAccountInformation(uid: str, unk: str, region: str, endpoint: str) -> dic
         data_enc = aes_cbc_encrypt(MAIN_KEY, MAIN_IV, payload)
 
         # Pega o token JWT e limpa possíveis aspas
-        jwtlogin = get_single_response().strip().replace('"', '').replace("'", '')
+        jwtlogin = get_token()
         versionob = fetch_attversion()
 
         print(f"[DEBUG] JWT usado: {jwtlogin}")
