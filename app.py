@@ -41,7 +41,7 @@ TIMEOUT = httpx.Timeout(30.0, connect=60.0)
 AES_KEY = b'Yg&tc%DEuh6%Zc^8'
 AES_IV = b'6oyZDr22E3ychjM%'
 def fetch_attversion():
-    url = "https://pt.textbin.net/raw/alrhw5dehl"  # Link com JSON simples
+    url = "https://raw.githubusercontent.com/minimalsend/release/refs/heads/main/version.json"  # Link com JSON simples
 
     try:
         response = requests.get(url)
