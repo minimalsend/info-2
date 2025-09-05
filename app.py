@@ -379,7 +379,7 @@ def GetAccountInformation(uid: str, unk: str, region: str, endpoint: str) -> dic
         data_enc = aes_cbc_encrypt(MAIN_KEY, MAIN_IV, payload)
 
         # Pega o token JWT e limpa possíveis aspas
-        jwtlogin = get_token()
+        jwtlogin = get_single_response().strip().replace('"', '').replace("'", '')
         versionob = fetch_attversion()
 
         print(f"[DEBUG] JWT usado: {jwtlogin}")
