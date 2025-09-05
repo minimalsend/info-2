@@ -345,7 +345,27 @@ def parse_response(content: str) -> dict:
         for line in content.split("\n")
         if ":" in line
     )
+def load_tokens():
+    try:
+        # Link direto para o JSON BR
+        url = "https://scvirtual.alphi.media/botsistem/sendlike/tokenbr.json"
         
+        response = requests.get(url)
+        response.raise_for_status()  # Verifica se a requisição foi bem-sucedida
+        
+        tokens_data = response.json()  # Converte para lista de dicionários
+        
+        # Extrai apenas os valores dos tokens para uma lista
+        tokens_list = [item["token"] for item in tokens_data if "token" in item]
+        
+        # Seleciona um token aleatório se houver tokens disponíveis
+        if tokens_list:
+            return random.choice(tokens_list)
+        return None
+
+    except Exception as e:
+        print(f"Error loading tokens: {e}")  # Mensagem de erro sem server_name
+        return None
 def GetAccountInformation(uid: str, unk: str, region: str, endpoint: str) -> dict:
     """Get player account information."""
     region = region.upper()
@@ -362,7 +382,7 @@ def GetAccountInformation(uid: str, unk: str, region: str, endpoint: str) -> dic
         data_enc = aes_cbc_encrypt(MAIN_KEY, MAIN_IV, payload)
 
         # Pega o token JWT e limpa possíveis aspas
-        jwtlogin = get_single_response().strip().replace('"', '').replace("'", '')
+        jwtlogin = load_tokens()
         versionob = fetch_attversion()
 
         print(f"[DEBUG] JWT usado: {jwtlogin}")
