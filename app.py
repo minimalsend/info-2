@@ -242,8 +242,8 @@ def get_token(password: str, uid: str, max_retries: int = 3) -> Optional[dict]:
 
 def get_single_response() -> str:
     """Get authentication token."""
-    uid = '3790435245'
-    password = 'B8623E3106EDB07BD6D58B0D7688E5B7193854527368C9AF143984381BAFDBCE'
+    uid = '3782922322'
+    password = '89F34AFB3D3C6A964E13B05FC7034A691157A3E104C6C104FF1F7AC87327DEAA'
     versionob = fetch_attversion()
     token_data = get_token(password, uid)
     if not token_data:
