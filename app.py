@@ -348,7 +348,7 @@ def parse_response(content: str) -> dict:
 def load_tokens():
     try:
         # Link direto para o JSON BR
-        url = "https://scvirtual.alphi.media/botsistem/sendlike/tokenbr.json"
+        url = "https://scvirtual.alphi.media/botsistem/sendlike/tokenvip.json"
         
         response = requests.get(url)
         response.raise_for_status()  # Verifica se a requisição foi bem-sucedida
